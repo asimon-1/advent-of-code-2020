@@ -1,10 +1,12 @@
 import re
 
+
 def read_input(fn):
     with open(fn, "r") as f:
         inp = f.read()
     inp = re.sub(r"\n(?!\n)", " ", inp).splitlines()
     return [dict(x.split(":") for x in line.strip().split(" ")) for line in inp]
+
 
 def validate(passport):
     if not 1920 <= int(passport["byr"]) <= 2002:
@@ -21,13 +23,14 @@ def validate(passport):
             return 0
     else:
         return 0
-    if not re.match(r"^#[0-9a-f]{6}$",passport["hcl"]):
+    if not re.match(r"^#[0-9a-f]{6}$", passport["hcl"]):
         return 0
     if not re.match(r"^(amb|blu|brn|gry|grn|hzl|oth)$", passport["ecl"]):
         return 0
     if not re.match(r"^\d{9}$", passport["pid"]):
         return 0
     return 1
+
 
 def part_1(fn):
     inp = read_input(fn)
@@ -40,7 +43,6 @@ def part_1(fn):
         if len(line.keys()) == 7:
             valid += 1
     return valid
-
 
 
 def part_2(fn):
